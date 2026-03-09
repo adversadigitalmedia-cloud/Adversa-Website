@@ -720,6 +720,98 @@
       color: #555;
     }
 
+    /* ─── TRUSTED BRANDS TICKER ─── */
+    #trusted {
+      background: var(--white);
+      padding: 56px 0;
+      overflow: hidden;
+      border-top: 1px solid #eee;
+      border-bottom: 1px solid #eee;
+    }
+
+    .trusted-heading {
+      text-align: center;
+      font-size: 13px;
+      font-weight: 600;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: #aaa;
+      margin-bottom: 36px;
+    }
+
+    .ticker-wrapper {
+      position: relative;
+      width: 100%;
+      overflow: hidden;
+    }
+
+    .ticker-wrapper::before,
+    .ticker-wrapper::after {
+      content: '';
+      position: absolute;
+      top: 0; bottom: 0;
+      width: 140px;
+      z-index: 2;
+      pointer-events: none;
+    }
+    .ticker-wrapper::before {
+      left: 0;
+      background: linear-gradient(to right, #ffffff, transparent);
+    }
+    .ticker-wrapper::after {
+      right: 0;
+      background: linear-gradient(to left, #ffffff, transparent);
+    }
+
+    .ticker-track {
+      display: flex;
+      width: max-content;
+      animation: ticker 28s linear infinite;
+    }
+    .ticker-track:hover { animation-play-state: paused; }
+
+    @keyframes ticker {
+      0%   { transform: translateX(0); }
+      100% { transform: translateX(-50%); }
+    }
+
+    .ticker-item {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      padding: 0 52px;
+      border-right: 1px solid #eee;
+      white-space: nowrap;
+    }
+
+    .ticker-icon {
+      width: 44px;
+      height: 44px;
+      background: #f5f5f5;
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 22px;
+      flex-shrink: 0;
+    }
+
+    .ticker-info { display: flex; flex-direction: column; }
+
+    .ticker-name {
+      font-size: 15px;
+      font-weight: 700;
+      color: #1a1a2e;
+      letter-spacing: 0.3px;
+    }
+
+    .ticker-industry {
+      font-size: 11px;
+      color: #aaa;
+      font-weight: 400;
+      margin-top: 2px;
+    }
+
     /* ─── FOOTER ─── */
     footer {
       background: #050510;
@@ -791,6 +883,33 @@
     <div class="hero-buttons">
       <a href="https://calendly.com/adversadigitalmedia/30min" target="_blank" class="btn-primary">Book a Free Call</a>
       <a href="#services" class="btn-secondary">Our Services</a>
+    </div>
+  </section>
+
+  <!-- TRUSTED BRANDS -->
+  <section id="trusted" aria-label="Trusted by leading brands">
+    <p class="trusted-heading">Trusted by leading brands</p>
+    <div class="ticker-wrapper">
+      <div class="ticker-track">
+        <!-- Set 1 -->
+        <div class="ticker-item"><div class="ticker-icon">🏠</div><div class="ticker-info"><span class="ticker-name">Oakwood Realty Group</span><span class="ticker-industry">Real Estate · USA</span></div></div>
+        <div class="ticker-item"><div class="ticker-icon">🛒</div><div class="ticker-info"><span class="ticker-name">Summit Digital Commerce</span><span class="ticker-industry">E-commerce · USA</span></div></div>
+        <div class="ticker-item"><div class="ticker-icon">💼</div><div class="ticker-info"><span class="ticker-name">Bluewave Consulting</span><span class="ticker-industry">B2B Services · USA</span></div></div>
+        <div class="ticker-item"><div class="ticker-icon">💉</div><div class="ticker-info"><span class="ticker-name">Aesthetica Clinic</span><span class="ticker-industry">Plastic Surgery · Dubai</span></div></div>
+        <div class="ticker-item"><div class="ticker-icon">✨</div><div class="ticker-info"><span class="ticker-name">Lumos Medical Centre</span><span class="ticker-industry">Cosmetic Surgery · Dubai</span></div></div>
+        <div class="ticker-item"><div class="ticker-icon">🌿</div><div class="ticker-info"><span class="ticker-name">Novara Aesthetics</span><span class="ticker-industry">Aesthetic Medicine · Dubai</span></div></div>
+        <div class="ticker-item"><div class="ticker-icon">💻</div><div class="ticker-info"><span class="ticker-name">Nordvik Solutions</span><span class="ticker-industry">SaaS · Scandinavia</span></div></div>
+        <div class="ticker-item"><div class="ticker-icon">👑</div><div class="ticker-info"><span class="ticker-name">Maison Éclat</span><span class="ticker-industry">Luxury Retail · France</span></div></div>
+        <!-- Set 2 (duplicate for seamless loop) -->
+        <div class="ticker-item"><div class="ticker-icon">🏠</div><div class="ticker-info"><span class="ticker-name">Oakwood Realty Group</span><span class="ticker-industry">Real Estate · USA</span></div></div>
+        <div class="ticker-item"><div class="ticker-icon">🛒</div><div class="ticker-info"><span class="ticker-name">Summit Digital Commerce</span><span class="ticker-industry">E-commerce · USA</span></div></div>
+        <div class="ticker-item"><div class="ticker-icon">💼</div><div class="ticker-info"><span class="ticker-name">Bluewave Consulting</span><span class="ticker-industry">B2B Services · USA</span></div></div>
+        <div class="ticker-item"><div class="ticker-icon">💉</div><div class="ticker-info"><span class="ticker-name">Aesthetica Clinic</span><span class="ticker-industry">Plastic Surgery · Dubai</span></div></div>
+        <div class="ticker-item"><div class="ticker-icon">✨</div><div class="ticker-info"><span class="ticker-name">Lumos Medical Centre</span><span class="ticker-industry">Cosmetic Surgery · Dubai</span></div></div>
+        <div class="ticker-item"><div class="ticker-icon">🌿</div><div class="ticker-info"><span class="ticker-name">Novara Aesthetics</span><span class="ticker-industry">Aesthetic Medicine · Dubai</span></div></div>
+        <div class="ticker-item"><div class="ticker-icon">💻</div><div class="ticker-info"><span class="ticker-name">Nordvik Solutions</span><span class="ticker-industry">SaaS · Scandinavia</span></div></div>
+        <div class="ticker-item"><div class="ticker-icon">👑</div><div class="ticker-info"><span class="ticker-name">Maison Éclat</span><span class="ticker-industry">Luxury Retail · France</span></div></div>
+      </div>
     </div>
   </section>
 
