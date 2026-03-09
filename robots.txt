@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://adversa.in/sitemap.xml
