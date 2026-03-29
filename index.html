@@ -384,126 +384,105 @@
 
     /* ─── SERVICES ─── */
     #services {
-      background: var(--light-bg);
-      color: var(--dark-text);
-      overflow: hidden;
+      background: var(--navy);
+      color: var(--white);
+      padding: 100px 60px;
     }
 
-    /* The viewport — no overflow hidden so cards stay crisp and shadows show */
-    .cylinder-viewport {
-      position: relative;
-      width: 460px;
-      height: 300px;
+    .services-rows {
+      max-width: 1100px;
       margin: 0 auto;
-      perspective: 1100px;
-    }
-
-    /* The rotating drum */
-    .cylinder-drum {
-      width: 100%;
-      height: 100%;
-      position: relative;
-      transform-style: preserve-3d;
-      transition: transform 0.65s cubic-bezier(0.4, 0, 0.2, 1);
-    }
-
-    .service-card {
-      position: absolute;
-      width: 460px;
-      height: 280px;
-      left: 0;
-      top: 10px;
-      background: var(--white);
-      border-radius: 20px;
-      padding: 36px 32px;
-      box-shadow: 0 8px 40px rgba(0,0,0,0.15);
-      border-top: 4px solid var(--red);
-      backface-visibility: hidden;
       display: flex;
       flex-direction: column;
-      justify-content: flex-start;
+      gap: 0;
     }
 
-    /* radius = 280 / (2 * tan(PI/4)) = 140px */
-    .service-card[data-face="0"] { transform: rotateX(0deg)    translateZ(140px); }
-    .service-card[data-face="1"] { transform: rotateX(-90deg)  translateZ(140px); }
-    .service-card[data-face="2"] { transform: rotateX(-180deg) translateZ(140px); }
-    .service-card[data-face="3"] { transform: rotateX(-270deg) translateZ(140px); }
-
-    .service-icon {
-      width: 52px;
-      height: 52px;
-      background: rgba(204,0,0,0.08);
-      border-radius: 14px;
+    .service-row {
       display: flex;
       align-items: center;
-      justify-content: center;
-      margin-bottom: 16px;
-      font-size: 24px;
+      gap: 80px;
+      padding: 60px 0;
+      border-bottom: 1px solid rgba(255,255,255,0.06);
+    }
+    .service-row:last-child { border-bottom: none; }
+
+    .service-row.reverse { flex-direction: row-reverse; }
+
+    .service-row-icon {
       flex-shrink: 0;
-    }
-
-    .service-card h3 {
-      font-size: 19px;
-      font-weight: 700;
-      color: var(--dark-text);
-      margin-bottom: 10px;
-    }
-
-    .service-card p {
-      font-size: 14px;
-      color: #666;
-      line-height: 1.7;
-    }
-
-    /* Controls */
-    .carousel-controls {
+      width: 100px;
+      height: 100px;
+      background: rgba(204,0,0,0.1);
+      border: 1px solid rgba(204,0,0,0.25);
+      border-radius: 24px;
       display: flex;
       align-items: center;
       justify-content: center;
-      gap: 24px;
-      margin-top: 36px;
+      font-size: 44px;
+      transition: transform 0.3s, background 0.3s;
+    }
+    .service-row:hover .service-row-icon {
+      transform: scale(1.08);
+      background: rgba(204,0,0,0.18);
     }
 
-    .carousel-dots {
-      display: flex;
-      gap: 10px;
-    }
+    .service-row-content { flex: 1; }
 
-    .carousel-dot {
-      width: 10px;
-      height: 10px;
-      border-radius: 50%;
-      background: #ccc;
-      cursor: pointer;
-      transition: all 0.3s;
-      border: none;
-    }
-    .carousel-dot.active {
-      background: var(--red);
-      transform: scale(1.3);
-    }
-
-    /* Service label badge */
-    .service-step {
+    .service-row-number {
       font-family: 'Audiowide', sans-serif;
-      font-size: 11px;
+      font-size: 12px;
       color: var(--red);
-      letter-spacing: 2px;
+      letter-spacing: 3px;
       text-transform: uppercase;
-      margin-bottom: 8px;
-      opacity: 0.7;
+      margin-bottom: 12px;
+      opacity: 0.8;
+    }
+
+    .service-row-content h3 {
+      font-size: clamp(22px, 2.5vw, 30px);
+      font-weight: 700;
+      color: var(--white);
+      margin-bottom: 14px;
+      line-height: 1.2;
+    }
+
+    .service-row-content p {
+      font-size: 16px;
+      color: var(--grey);
+      line-height: 1.8;
+      max-width: 540px;
+    }
+
+    .service-row-tag {
+      display: inline-block;
+      margin-top: 20px;
+      padding: 6px 16px;
+      border: 1px solid rgba(204,0,0,0.35);
+      border-radius: 20px;
+      font-size: 12px;
+      font-weight: 600;
+      color: #ff6666;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+    }
+
+    @media (max-width: 768px) {
+      .service-row, .service-row.reverse {
+        flex-direction: column;
+        gap: 28px;
+        padding: 40px 0;
+      }
     }
 
     /* ─── ABOUT ─── */
     #about {
-      background: var(--navy);
+      background: var(--light-bg);
       text-align: center;
     }
 
     .about-text {
       font-size: 18px;
-      color: var(--grey);
+      color: #555;
       max-width: 750px;
       margin: 24px auto 0;
       line-height: 1.8;
@@ -926,42 +905,44 @@
   <section id="services" aria-label="Our Services">
     <div class="section-center reveal">
       <span class="section-label">What We Do</span>
-      <h2 class="section-title dark">Our Services</h2>
+      <h2 class="section-title">Our Services</h2>
     </div>
-    <div class="cylinder-viewport reveal">
-      <div class="cylinder-drum" id="cylinderDrum">
-        <div class="service-card" data-face="0">
-          <div class="service-step">01 / 04</div>
-          <div class="service-icon">🎯</div>
-          <h3>Lead Generation</h3>
-          <p>We attract and convert high quality leads for your business through targeted strategies that actually work.</p>
-        </div>
-        <div class="service-card" data-face="1">
-          <div class="service-step">02 / 04</div>
-          <div class="service-icon">📈</div>
-          <h3>Paid Ads</h3>
-          <p>We run high-converting Google and Meta ad campaigns that bring you paying customers fast.</p>
-        </div>
-        <div class="service-card" data-face="2">
-          <div class="service-step">03 / 04</div>
-          <div class="service-icon">🔍</div>
-          <h3>SEO</h3>
-          <p>We optimize your website to rank on Google so customers find you before they find your competitors.</p>
-        </div>
-        <div class="service-card" data-face="3">
-          <div class="service-step">04 / 04</div>
-          <div class="service-icon">🤖</div>
-          <h3>GEO</h3>
-          <p>We optimize your brand for AI search engines like ChatGPT and Perplexity so you stay ahead of the curve.</p>
+    <div class="services-rows">
+      <div class="service-row reveal">
+        <div class="service-row-icon">🎯</div>
+        <div class="service-row-content">
+          <div class="service-row-number">01 — Lead Generation</div>
+          <h3>We bring the leads. You close the deals.</h3>
+          <p>We build and run targeted lead generation systems that attract high-quality prospects for your business — so your pipeline is always full and you spend less time chasing and more time closing.</p>
+          <span class="service-row-tag">Google · Meta · Landing Pages</span>
         </div>
       </div>
-    </div>
-    <div class="carousel-controls reveal">
-      <div class="carousel-dots" id="carouselDots">
-        <button class="carousel-dot active"></button>
-        <button class="carousel-dot"></button>
-        <button class="carousel-dot"></button>
-        <button class="carousel-dot"></button>
+      <div class="service-row reverse reveal">
+        <div class="service-row-icon">📈</div>
+        <div class="service-row-content">
+          <div class="service-row-number">02 — Paid Ads</div>
+          <h3>Ad spend that actually returns.</h3>
+          <p>We run high-converting Google and Meta ad campaigns built around your goals — not vanity metrics. Every rupee of your budget is tracked, optimised, and held accountable to real results.</p>
+          <span class="service-row-tag">Google Ads · Meta Ads · Retargeting</span>
+        </div>
+      </div>
+      <div class="service-row reveal">
+        <div class="service-row-icon">🔍</div>
+        <div class="service-row-content">
+          <div class="service-row-number">03 — SEO</div>
+          <h3>Rank first. Get found. Stay ahead.</h3>
+          <p>We optimise your website to rank on Google so customers find you before they find your competitors. No black-hat tricks — just solid, sustainable SEO that compounds over time.</p>
+          <span class="service-row-tag">On-Page · Technical · Link Building</span>
+        </div>
+      </div>
+      <div class="service-row reverse reveal">
+        <div class="service-row-icon">🤖</div>
+        <div class="service-row-content">
+          <div class="service-row-number">04 — GEO</div>
+          <h3>Be the answer AI gives your customers.</h3>
+          <p>Search is changing. When someone asks ChatGPT or Perplexity for the best marketing agency, we make sure Adversa — and our clients — are the answer. GEO is the next frontier of visibility.</p>
+          <span class="service-row-tag">ChatGPT · Perplexity · AI Overviews</span>
+        </div>
       </div>
     </div>
   </section>
@@ -970,7 +951,7 @@
   <section id="about" aria-label="About Adversa">
     <div class="section-center reveal">
       <span class="section-label">Who We Are</span>
-      <h2 class="section-title">About Us</h2>
+      <h2 class="section-title dark">About Us</h2>
       <p class="about-text">
         Adversa is a digital marketing agency built for small businesses. We combine data-driven strategies with creative execution to help you generate leads, grow online, and outpace your competition.
       </p>
@@ -1058,40 +1039,6 @@
     window.addEventListener('scroll', () => {
       nav.style.boxShadow = window.scrollY > 50 ? '0 4px 30px rgba(0,0,0,0.3)' : 'none';
     });
-
-    // ── Cylinder drum carousel ──
-    const drum = document.getElementById('cylinderDrum');
-    const dots = document.querySelectorAll('.carousel-dot');
-    const total = 4;
-    let current = 0;
-    let angle = 0;
-
-    function rotateTo(index, direction) {
-      angle += direction * 90;
-      drum.style.transform = `rotateX(${angle}deg)`;
-      dots.forEach((d, i) => d.classList.toggle('active', i === index));
-    }
-
-    // Dots still clickable
-    dots.forEach((dot, i) => {
-      dot.addEventListener('click', () => {
-        if (i === current) return;
-        const diff = i - current;
-        const direction = diff > 0 ? 1 : -1;
-        const steps = Math.abs(diff);
-        angle += direction * 90 * steps;
-        drum.style.transform = `rotateX(${angle}deg)`;
-        dots.forEach((d, j) => d.classList.toggle('active', j === i));
-        current = i;
-      });
-    });
-
-    // Auto-rotate every 7s
-    setInterval(() => {
-      const next = (current + 1) % total;
-      rotateTo(next, 1);
-      current = next;
-    }, 7000);
 
     // ── Form submit ──
     const form = document.querySelector('.contact-form');
