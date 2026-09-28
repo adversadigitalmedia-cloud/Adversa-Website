@@ -1569,24 +1569,45 @@
 
       const strategies = generateStrategies(scanData.scores, scanData.total);
 
-      await fetch('https://formspree.io/f/maqpydpq', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
-        body: JSON.stringify({
-          type: '🎯 Marketing Score Scan',
-          business: scanData.name,
-          website: scanData.url,
-          instagram: scanData.instagram || 'Not provided',
-          email,
-          phone: phone || 'Not provided',
-          score: scanData.total + '/100',
-          strategies
-        })
-      });
+      try {
+        const res = await fetch('https://formspree.io/f/maqpydpq', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            'Accept': 'application/json',
+            'Origin': 'https://adversa.in'
+          },
+          body: JSON.stringify({
+            _subject: '🎯 New Marketing Score Scan — ' + scanData.name,
+            type: 'Marketing Score Scan',
+            business: scanData.name,
+            website: scanData.url,
+            instagram: scanData.instagram || 'Not provided',
+            email: email,
+            phone: phone || 'Not provided',
+            score: scanData.total + '/100',
+            strategies: strategies
+          })
+        });
 
-      document.getElementById('scoreEmailDisplay').textContent = email;
-      document.getElementById('scoreEmailGate').style.display = 'none';
-      document.getElementById('scoreConfirmed').style.display = 'block';
+        const data = await res.json();
+
+        if (res.ok) {
+          document.getElementById('scoreEmailDisplay').textContent = email;
+          document.getElementById('scoreEmailGate').style.display = 'none';
+          document.getElementById('scoreConfirmed').style.display = 'block';
+        } else {
+          console.error('Formspree error:', data);
+          alert('Something went wrong. Please try again.');
+          btn.textContent = 'Send Me My Free Strategies →';
+          btn.disabled = false;
+        }
+      } catch (err) {
+        console.error('Submit error:', err);
+        alert('Something went wrong. Please try again.');
+        btn.textContent = 'Send Me My Free Strategies →';
+        btn.disabled = false;
+      }
     }
 
     async function checkPageSpeed(url) {
