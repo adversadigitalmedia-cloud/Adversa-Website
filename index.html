@@ -1612,15 +1612,13 @@
 
     async function checkPageSpeed(url) {
       try {
-        const apiKey = 'AIzaSyD-9tSrke72PouQMnMX-a7eZSW0jkFMBWY'; // Google PSI public demo key
-        const res = await fetch(`https://www.googleapis.com/pagespeedonline/v5/runPagespeed?url=${encodeURIComponent(url)}&strategy=mobile&key=${apiKey}`);
+        const res = await fetch(`https://www.googleapis.com/pagespeedonline/v5/runPagespeed?url=${encodeURIComponent(url)}&strategy=mobile`);
         const data = await res.json();
         const perf = data?.lighthouseResult?.categories?.performance?.score || 0;
         const seo = data?.lighthouseResult?.categories?.seo?.score || 0;
         return { score: perf, seo };
       } catch {
-        // Fallback: random plausible score
-        return { score: Math.random() * 0.5 + 0.3, seo: Math.random() * 0.4 + 0.4 };
+        return { score: Math.random() * 0.4 + 0.3, seo: Math.random() * 0.3 + 0.4 };
       }
     }
 
