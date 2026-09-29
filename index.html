@@ -1578,24 +1578,21 @@
       const strategies = generateStrategies(scanData.scores, scanData.total);
 
       try {
+        const formData = new FormData();
+        formData.append('_subject', '🎯 New Marketing Score Scan — ' + (scanData.name || 'Unknown'));
+        formData.append('type', 'Marketing Score Scan');
+        formData.append('business', scanData.name || 'Unknown');
+        formData.append('website', scanData.url || 'Unknown');
+        formData.append('instagram', scanData.instagram || 'Not provided');
+        formData.append('email', email);
+        formData.append('phone', phone || 'Not provided');
+        formData.append('score', (scanData.total || 0) + '/100');
+        formData.append('strategies', strategies);
+
         const res = await fetch('https://formspree.io/f/xljdabed', {
           method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-            'Accept': 'application/json',
-            'Origin': 'https://adversa.in'
-          },
-          body: JSON.stringify({
-            _subject: '🎯 New Marketing Score Scan — ' + scanData.name,
-            type: 'Marketing Score Scan',
-            business: scanData.name,
-            website: scanData.url,
-            instagram: scanData.instagram || 'Not provided',
-            email: email,
-            phone: phone || 'Not provided',
-            score: scanData.total + '/100',
-            strategies: strategies
-          })
+          headers: { 'Accept': 'application/json' },
+          body: formData
         });
 
         const data = await res.json();
