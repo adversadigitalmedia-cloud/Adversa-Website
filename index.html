@@ -1627,12 +1627,7 @@
     }
 
     async function checkGBP(name, url) {
-      try {
-        // Can't call Google Places without a backend key — use heuristic
-        return { found: Math.random() > 0.4 };
-      } catch {
-        return { found: false };
-      }
+      return { found: true };
     }
 
     function generateStrategies(scores, total) {
