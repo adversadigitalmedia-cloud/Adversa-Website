@@ -145,6 +145,10 @@
   <!-- ── Favicon ── -->
   <link rel="icon" type="image/svg+xml" href="favicon.svg">
   <link rel="shortcut icon" href="favicon.svg">
+  <!-- EmailJS -->
+  <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+  <script>emailjs.init('eiVfkXcPrOkvc-txX');</script>
+
   <!-- Google tag (gtag.js) -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-96DYVX91V3"></script>
   <script>
@@ -1578,29 +1582,21 @@
       const strategies = generateStrategies(scanData.scores, scanData.total);
 
       try {
-        const res = await fetch('https://formspree.io/f/xljdabed', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
-          body: JSON.stringify({
-            email: email,
-            name: scanData.name || 'Unknown',
-            website: scanData.url || 'Unknown',
-            instagram: scanData.instagram || 'Not provided',
-            phone: phone || 'Not provided',
-            score: (scanData.total || 0) + '/100',
-            type: 'Marketing Score Scan',
-            strategies: strategies
-          })
+        await emailjs.send('Adversa', 'template_na8xdeq', {
+          business_name: scanData.name || 'Unknown',
+          website: scanData.url || 'Unknown',
+          instagram: scanData.instagram || 'Not provided',
+          email: email,
+          phone: phone || 'Not provided',
+          score: (scanData.total || 0) + '',
+          strategies: strategies
         });
 
-        if (res.ok) {
-          document.getElementById('scoreEmailDisplay').textContent = email;
-          document.getElementById('scoreEmailGate').style.display = 'none';
-          document.getElementById('scoreConfirmed').style.display = 'block';
-        } else {
-          throw new Error('Failed');
-        }
-      } catch {
+        document.getElementById('scoreEmailDisplay').textContent = email;
+        document.getElementById('scoreEmailGate').style.display = 'none';
+        document.getElementById('scoreConfirmed').style.display = 'block';
+      } catch (err) {
+        console.error('EmailJS error:', err);
         alert('Something went wrong. Please try again.');
         btn.textContent = 'Send Me My Free Strategies →';
         btn.disabled = false;
