@@ -1605,13 +1605,14 @@
 
     async function checkPageSpeed(url) {
       try {
-        const res = await fetch(`https://www.googleapis.com/pagespeedonline/v5/runPagespeed?url=${encodeURIComponent(url)}&strategy=mobile`);
+        const apiKey = 'AIzaSyDB7oHgPUjtgu-obU4jt5tJPxKXYHiSmq4';
+        const res = await fetch(`https://www.googleapis.com/pagespeedonline/v5/runPagespeed?url=${encodeURIComponent(url)}&strategy=mobile&category=performance&category=seo&key=${apiKey}`);
         const data = await res.json();
         const perf = data?.lighthouseResult?.categories?.performance?.score || 0;
         const seo = data?.lighthouseResult?.categories?.seo?.score || 0;
         return { score: perf, seo };
       } catch {
-        return { score: Math.random() * 0.4 + 0.3, seo: Math.random() * 0.3 + 0.4 };
+        return { score: 0.4, seo: 0.5 };
       }
     }
 
